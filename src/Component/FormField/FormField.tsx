@@ -120,11 +120,11 @@ const _renderErrorMessage: HintOrErrorMessage = (name, errors) => {
   const error = errors[name] || {};
 
   if (!errors[name]) {
-    return;
+    return <View style={styles.hintContainer} />;
   }
   return (
-    <View style={styles.hintContainer}>
-      <Text>{String(error.message)}</Text>
+    <View style={styles.errorContainer}>
+      <Text style={styles.errorText}>{String(error.message)}</Text>
     </View>
   );
 };

@@ -1,17 +1,28 @@
 import {StyleSheet} from 'react-native';
 import {Style} from './FormField.types';
 import {moderateScale} from 'react-native-size-matters';
+import Colors from '../../Utils/Color';
+
+const {brandColor, commonColor} = Colors;
 
 const styles: Style = StyleSheet.create({
   hintContainer: {
-    marginTop: moderateScale(4), // TextInput already have marginBottom: 6
+    height: moderateScale(16),
+  },
+  errorContainer: {
+    marginTop: moderateScale(2),
   },
   linkText: {
     fontSize: moderateScale(16),
     fontWeight: '600',
-    color: 'green',
+    color: brandColor.darkGreen,
     textDecorationLine: 'underline',
-    textDecorationColor: 'green',
+    textDecorationColor: brandColor.darkGreen,
+  },
+  errorText: {
+    fontSize: moderateScale(13),
+    fontWeight: '500',
+    color: commonColor.dangerRed,
   },
 });
 

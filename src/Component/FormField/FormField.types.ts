@@ -57,7 +57,9 @@ export type FormContext = UseFormReturn;
 export type GetValues = (name: string) => string;
 export type Style = {
   hintContainer: ViewStyle;
+  errorContainer: ViewStyle;
   linkText: TextStyle;
+  errorText: TextStyle;
 };
 
 export type UseFormContextSpyInstance = jest.SpyInstance<

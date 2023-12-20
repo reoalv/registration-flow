@@ -1,9 +1,12 @@
 import {TextStyle, ViewStyle} from 'react-native';
 import {moderateScale} from 'react-native-size-matters';
+import Colors from '../../Utils/Color';
+
+const {brandColor, neutralColor, commonColor} = Colors;
 
 const borderInput: ViewStyle = {
-  borderWidth: 1,
-  backgroundColor: 'white',
+  borderWidth: moderateScale(1.2),
+  backgroundColor: neutralColor.white,
   borderRadius: moderateScale(6),
   paddingVertical: moderateScale(7),
   paddingHorizontal: moderateScale(7),
@@ -13,13 +16,13 @@ const Styles = {
   container: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: moderateScale(6),
+    marginBottom: moderateScale(4),
     minHeight: 0,
   } as ViewStyle,
   inputText: {
     fontSize: moderateScale(18),
     paddingBottom: moderateScale(6),
-    color: 'black',
+    color: neutralColor.black,
     paddingTop: moderateScale(8),
     textAlign: 'left',
     flex: 1,
@@ -39,20 +42,20 @@ const Styles = {
   } as ViewStyle,
   defaultLine: {
     ...borderInput,
-    borderColor: 'black',
+    borderColor: neutralColor.softGrey,
   } as ViewStyle,
   activeLine: {
     ...borderInput,
-    borderColor: 'green',
+    borderColor: brandColor.primaryGreen,
   } as ViewStyle,
   errorLine: {
     ...borderInput,
-    borderColor: 'red',
+    borderColor: commonColor.dangerRed,
   } as ViewStyle,
   inlineLeftNoteContainer: {
     marginRight: moderateScale(8),
   } as ViewStyle,
-  placeholderColor: 'grey',
+  placeholderColor: neutralColor.grey,
 };
 
 export default Styles;

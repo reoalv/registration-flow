@@ -17,13 +17,6 @@ const persistConfig = {
 
 const combineReducer = combineReducers({...Reducers});
 
-export const rootReducer = (
-  state: ReturnType<typeof store.getState> | undefined,
-  action: never,
-) => {
-  return combineReducers(combineReducer)(state, action);
-};
-
 const persistedReducer = persistReducer(persistConfig, combineReducer);
 
 export const store = configureStore({
