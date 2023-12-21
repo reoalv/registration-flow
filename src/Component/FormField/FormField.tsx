@@ -173,7 +173,7 @@ const _getTextInputStatusProps: GetTextInputStatusProps = (
   }
 
   if (isFocused) {
-    return InputStatusConstants.INPUT_STATUS.DEFAULT;
+    return InputStatusConstants.INPUT_STATUS.ACTIVE;
   }
 
   return InputStatusConstants.INPUT_STATUS.DEFAULT;

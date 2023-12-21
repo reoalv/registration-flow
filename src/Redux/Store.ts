@@ -1,4 +1,4 @@
-import {combineReducers} from 'redux';
+import {UnknownAction, combineReducers} from 'redux';
 import Reducers from './Reducers';
 import {configureStore} from '@reduxjs/toolkit';
 import Storage from '@react-native-async-storage/async-storage';
@@ -9,6 +9,10 @@ import {
   persistReducer,
   persistStore,
 } from 'redux-persist';
+
+export type AnyAction = {payload?: any; type: string};
+export type AnyActionFn = (action: AnyAction | UnknownAction) => void;
+export type RootState = ReturnType<typeof store.getState>;
 
 const persistConfig = {
   key: 'root',

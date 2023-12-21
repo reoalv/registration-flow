@@ -1,8 +1,11 @@
 import {createReducer} from '@reduxjs/toolkit';
 import {setPasswordEmail} from '../Action/Auth';
 
-const initialState = {
-  data: {},
+export const initialState = {
+  data: {
+    email: '',
+    password: '',
+  },
 };
 const AuthReducers = createReducer(initialState, builder => {
   builder.addCase(setPasswordEmail, (state, {payload}) => {

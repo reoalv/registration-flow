@@ -1,11 +1,13 @@
+import {OtpVerificationParams} from './OtpVerificationScreen/OtpVerificationScreen.types';
+
 export enum Routes {
   RegistrationScreen = 'RegistrationScreen',
-  OtpScreen = 'OtpScreen',
-  HomeScreen = 'HomeScreen',
+  OtpVerificationScreen = 'OtpVerificationScreen',
+  WelcomHomeScreen = 'WelcomHomeScreen',
 }
 
 export type RoutesStackParams = {
   [Routes.RegistrationScreen]: undefined;
-  [Routes.OtpScreen]: undefined;
-  [Routes.HomeScreen]: undefined;
+  [Routes.OtpVerificationScreen]: OtpVerificationParams;
+  [Routes.WelcomHomeScreen]: undefined;
 };

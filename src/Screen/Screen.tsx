@@ -3,19 +3,40 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
 import {Routes, RoutesStackParams} from './Screen.types';
 import RegistrationScreen from './RegistrationScreen';
+import OtpVerificationScreen from './OtpVerificationScreen';
+import WelcomHomeScreen from './WelcomHomeScreen/WelcomHomeScreen';
+import {useSelector} from 'react-redux';
+import {RootState} from '../Redux/Store';
 
 const Stack = createNativeStackNavigator<RoutesStackParams>();
 
 const RoutesScreen = () => {
+  const {email, password} = useSelector(
+    (state: RootState) => state.AuthReducers,
+  ).data;
+  const haveEmailPassword = !!email && !!password;
+  console.log('emapass', email, password);
+
   return (
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{headerShown: false}}
-        initialRouteName={Routes.RegistrationScreen}>
+        initialRouteName={
+          haveEmailPassword
+            ? Routes.WelcomHomeScreen
+            : Routes.RegistrationScreen
+        }>
         <Stack.Screen
           name={Routes.RegistrationScreen}
           component={RegistrationScreen}
-          options={{headerShown: true}}
+        />
+        <Stack.Screen
+          name={Routes.OtpVerificationScreen}
+          component={OtpVerificationScreen}
+        />
+        <Stack.Screen
+          name={Routes.WelcomHomeScreen}
+          component={WelcomHomeScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>

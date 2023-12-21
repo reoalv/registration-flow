@@ -10,6 +10,8 @@ import FormField from '../../Component/FormField/FormField';
 import {
   FormFieldRegisterType,
   HidePassType,
+  RegistrationScreenNavigationProps,
+  RegistrationScreenProps,
   SetHidePassType,
 } from './RegistrationScreen.types';
 import FormFieldConstants from '../../Constants/FormField';
@@ -17,6 +19,8 @@ import styles from './RegistrationScreen.styles';
 import {emailPattern} from './RegistrationScreen.config';
 import {validatePasswordWithErrorHint} from '../../Utils/PasswordValidation';
 import Colors from '../../Utils/Color';
+import {Routes} from '../Screen.types';
+import Constants from '../../Constants/FormField';
 
 const {
   checkLengthWithHint,
@@ -25,14 +29,24 @@ const {
   checkUpperCaseWithHint,
 } = validatePasswordWithErrorHint;
 
-const _renderButton = (formContext: UseFormReturn<FormFieldRegisterType>) => {
-  const {formState} = formContext;
+const {EMAIL_FORM_NAME, PASSWORD_FORM_NAME} = Constants;
+
+const _renderButton = (
+  formContext: UseFormReturn<FormFieldRegisterType>,
+  navigation: RegistrationScreenNavigationProps,
+) => {
+  const {formState, getValues, setValue} = formContext;
   const {isValid} = formState;
+  const {email, password} = getValues();
 
   return (
     <Button
       title="Submit"
-      onPress={() => console.log('lanjut')}
+      onPress={() => {
+        navigation.navigate(Routes.OtpVerificationScreen, {email, password});
+        setValue(EMAIL_FORM_NAME, '');
+        setValue(PASSWORD_FORM_NAME, '');
+      }}
       color={Colors.brandColor.darkGreen}
       disabled={!isValid}
     />
@@ -67,8 +81,8 @@ const _getPasswordRules = (): UseControllerProps['rules'] => ({
   validate: {
     upperCase: checkUpperCaseWithHint,
     lowerCase: checkLowerCaseWithHint,
-    number: checkSymbolsWithHint,
     length: checkLengthWithHint,
+    number: checkSymbolsWithHint,
   },
 });
 
@@ -92,7 +106,10 @@ const _renderFormPassword = (
   </View>
 );
 
-const RegistrationScreen = () => {
+const RegistrationScreen = (
+  props: RegistrationScreenProps,
+): React.ReactElement => {
+  const {navigation} = props;
   const [hidePass, setHidePass] = React.useState<boolean>(true);
   const formContext = useForm<FormFieldRegisterType>();
 
@@ -103,7 +120,7 @@ const RegistrationScreen = () => {
         {_renderFormEmail(formContext)}
         {_renderFormPassword(formContext, hidePass, setHidePass)}
       </View>
-      {_renderButton(formContext)}
+      {_renderButton(formContext, navigation)}
     </ScrollView>
   );
 };

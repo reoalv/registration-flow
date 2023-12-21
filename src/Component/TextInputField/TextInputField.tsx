@@ -35,7 +35,7 @@ const _onBlur =
 
 const _getPlaceholder = (props: Props, state: State): CustomProps => {
   const {isFocus} = state;
-  const placeholder = isFocus ? '' : props.placeholder;
+  const placeholder = isFocus || !props.placeholder ? '' : props.placeholder;
 
   return {
     placeholder,
@@ -82,6 +82,7 @@ const _renderTextInput = (props: Props, state: State): React.ReactElement => {
       onBlur={_onBlur(setLineStyle, props, setIsFocus)}
       onChangeText={_onChange(props, setLineStyle)}
       style={styles.inputText}
+      onKeyPress={props.onKeyPress}
     />
   );
 };

@@ -1,5 +1,10 @@
 import type {FieldErrors} from 'react-hook-form';
-import {TextInput, ViewStyle} from 'react-native';
+import {
+  NativeSyntheticEvent,
+  TextInput,
+  TextInputKeyPressEventData,
+  ViewStyle,
+} from 'react-native';
 import Constants from '../../Constants/InputStatus';
 
 export type KeyboardType =
@@ -16,6 +21,9 @@ export type Props = {
   onBlur?: () => void;
   onFocus?: () => void;
   onChange?: (value: string) => void;
+  onKeyPress?: (
+    event: NativeSyntheticEvent<TextInputKeyPressEventData>,
+  ) => void;
   keyboardType: KeyboardType;
   defaultValue?: string;
   value?: string;
@@ -27,7 +35,7 @@ export type Props = {
   suffix?: React.ReactElement;
   autoFocus?: boolean;
   editable?: boolean;
-  inputRef?: React.RefCallback<TextInput>;
+  inputRef?: React.RefCallback<TextInput | null>;
 };
 
 export type Opts = {

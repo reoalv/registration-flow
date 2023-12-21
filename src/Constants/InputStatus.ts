@@ -10,6 +10,10 @@ const Constants = {
     NUMBER_PAD: 'number-pad',
     DEFAULT: 'default',
   } as const,
+  CODE_FIELD_VARIANT: {
+    FOUR_CODE: 'fourCode',
+    SIX_CODE: 'sixCode',
+  } as const,
 };
 
 export default Constants;
