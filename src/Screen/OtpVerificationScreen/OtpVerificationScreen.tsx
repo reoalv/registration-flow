@@ -6,14 +6,16 @@ import {
   OtpVerificationNavigationProps,
   OtpVerificationParams,
   OtpVerificationScreenProps,
+  SetCode,
 } from './OtpVerificationScreen.types';
 import {_getDescAlert, _getTitleAlert} from './OtpVerificationScreen.config';
 import {Routes} from '../Screen.types';
 import {setPasswordEmail} from '../../Redux/Action/Auth';
 import {useDispatch} from 'react-redux';
 import {AnyActionFn} from '../../Redux/Store';
+import Countdown from '../../Component/Countdown/Countdown';
 
-const DUMMY_SUCCESS = '1111';
+const DUMMY_SUCCESS = '111111';
 
 const onPressSuccess =
   (
@@ -58,18 +60,42 @@ const renderAlert = (
   ]);
 };
 
-const useCheckCode = (
+const _useHooksCheckCode = (
   code: string,
   navigation: OtpVerificationNavigationProps,
   emailPassword: OtpVerificationParams,
   useSaveData: AnyActionFn,
-) =>
-  React.useCallback(() => {
-    if (code.length === 4) {
+) => {
+  //checkCode function
+  const useCheckCode = React.useCallback(() => {
+    if (code.length === 6) {
       const isSuccess = code === DUMMY_SUCCESS;
       renderAlert(isSuccess, navigation, emailPassword, useSaveData);
     }
-  }, [code, navigation, emailPassword, useSaveData]);
+  }, [code, emailPassword, navigation, useSaveData]);
+
+  //checkCode effect
+  return React.useEffect(useCheckCode, [useCheckCode]);
+};
+
+const renderDesc = (email: string) => (
+  <View style={styles.containerDesc}>
+    <Text style={styles.textTitleDesc}>Enter authentication code</Text>
+    <Text style={styles.textDesc}>Enter 6-digit sent to email {email}</Text>
+  </View>
+);
+
+const renderField = (setCode: SetCode, email: string) => {
+  return (
+    <React.Fragment>
+      <View style={{flex: 1}}>
+        {renderDesc(email)}
+        {<OtpCodeField variant="sixCode" onChange={setCode} />}
+      </View>
+      {<Countdown duration={30} />}
+    </React.Fragment>
+  );
+};
 
 const OtpVerificationScreen = (props: OtpVerificationScreenProps) => {
   const {
@@ -78,14 +104,14 @@ const OtpVerificationScreen = (props: OtpVerificationScreenProps) => {
   const [code, setCode] = React.useState('');
   const useSaveData = useDispatch();
 
-  useCheckCode(code, props.navigation, params, useSaveData)();
+  _useHooksCheckCode(code, props.navigation, params, useSaveData);
 
   return (
-    <ScrollView contentContainerStyle={styles.scrollContainer}>
-      <View style={{flex: 1}}>
-        <Text style={styles.stepText}>Step 2 of 2</Text>
-        {<OtpCodeField variant="fourCode" onChange={setCode} />}
-      </View>
+    <ScrollView
+      keyboardShouldPersistTaps="always"
+      contentContainerStyle={styles.scrollContainer}>
+      <Text style={styles.stepText}>Step 2 of 2</Text>
+      {renderField(setCode, params.email)}
     </ScrollView>
   );
 };

@@ -101,6 +101,7 @@ const _renderFormPassword = (
         linkText={hidePass ? 'Show' : 'Hide'}
         secureTextEntry={hidePass}
         onLinkTextPress={() => setHidePass(!hidePass)}
+        inputSettings={{clearSpace: true}}
       />
     </FormProvider>
   </View>
@@ -114,7 +115,9 @@ const RegistrationScreen = (
   const formContext = useForm<FormFieldRegisterType>();
 
   return (
-    <ScrollView contentContainerStyle={styles.scrollContainer}>
+    <ScrollView
+      keyboardShouldPersistTaps="always"
+      contentContainerStyle={styles.scrollContainer}>
       <View style={{flex: 1}}>
         <Text style={styles.stepText}>Step 1 of 2</Text>
         {_renderFormEmail(formContext)}

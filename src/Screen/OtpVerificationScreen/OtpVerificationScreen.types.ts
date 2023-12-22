@@ -5,6 +5,9 @@ import {Routes, RoutesStackParams} from '../Screen.types';
 export type Styles = {
   scrollContainer: ViewStyle;
   stepText: TextStyle;
+  containerDesc: ViewStyle;
+  textTitleDesc: TextStyle;
+  textDesc: TextStyle;
 };
 
 export type OtpVerificationNavigationProps = NativeStackNavigationProp<
@@ -23,3 +26,5 @@ export type OtpVerificationScreenProps = {
     params: OtpVerificationParams;
   };
 };
+
+export type SetCode = React.Dispatch<React.SetStateAction<string>>;

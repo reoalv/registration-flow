@@ -15,7 +15,6 @@ const RoutesScreen = () => {
     (state: RootState) => state.AuthReducers,
   ).data;
   const haveEmailPassword = !!email && !!password;
-  console.log('emapass', email, password);
 
   return (
     <NavigationContainer>

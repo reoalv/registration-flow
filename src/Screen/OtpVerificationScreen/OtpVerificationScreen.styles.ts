@@ -16,6 +16,19 @@ const styles: Styles = StyleSheet.create({
     color: neutralColor.black,
     marginBottom: moderateScale(12),
   },
+  containerDesc: {
+    paddingVertical: moderateScale(18),
+  },
+  textTitleDesc: {
+    fontSize: moderateScale(24),
+    fontWeight: '600',
+    color: neutralColor.grey,
+    marginBottom: moderateScale(6),
+  },
+  textDesc: {
+    fontSize: moderateScale(18),
+    color: neutralColor.grey,
+  },
 });
 
 export default styles;
